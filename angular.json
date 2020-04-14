@@ -1,0 +1,325 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "projects": {
+    "face-recognition-admin": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/face-recognition-admin",
+      "sourceRoot": "apps/face-recognition-admin/src",
+      "prefix": "face-recognition",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/apps/face-recognition-admin",
+            "index": "apps/face-recognition-admin/src/index.html",
+            "main": "apps/face-recognition-admin/src/main.ts",
+            "polyfills": "apps/face-recognition-admin/src/polyfills.ts",
+            "tsConfig": "apps/face-recognition-admin/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/face-recognition-admin/src/favicon.ico",
+              "apps/face-recognition-admin/src/assets"
+            ],
+            "styles": ["apps/face-recognition-admin/src/styles.scss"],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./angular.webpack.js"
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/face-recognition-admin/src/environments/environment.ts",
+                  "with": "apps/face-recognition-admin/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/face-recognition-admin/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "face-recognition-admin:build",
+            "proxyConfig": "apps/face-recognition-admin/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "face-recognition-admin:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "face-recognition-admin:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/face-recognition-admin/tsconfig.app.json",
+              "apps/face-recognition-admin/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/face-recognition-admin/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/face-recognition-admin/jest.config.js",
+            "tsConfig": "apps/face-recognition-admin/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/face-recognition-admin/src/test-setup.ts",
+            "customWebpackConfig": {
+              "path": "./angular.webpack.js",
+              "target": "electron-renderer"
+            }
+          }
+        }
+      }
+    },
+    "face-recognition-admin-e2e": {
+      "root": "apps/face-recognition-admin-e2e",
+      "sourceRoot": "apps/face-recognition-admin-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/face-recognition-admin-e2e/cypress.json",
+            "tsConfig": "apps/face-recognition-admin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "face-recognition-admin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "face-recognition-admin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/face-recognition-admin-e2e/tsconfig.e2e.json"],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/face-recognition-admin-e2e/**"
+            ]
+          }
+        }
+      }
+    },
+    "utils-electron-helper": {
+      "projectType": "library",
+      "root": "libs/utils/electron-helper",
+      "sourceRoot": "libs/utils/electron-helper/src",
+      "prefix": "face-recognition",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/utils/electron-helper/tsconfig.lib.json",
+            "project": "libs/utils/electron-helper/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/utils/electron-helper/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/utils/electron-helper/tsconfig.lib.json",
+              "libs/utils/electron-helper/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/utils/electron-helper/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/utils/electron-helper/jest.config.js",
+            "tsConfig": "libs/utils/electron-helper/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/utils/electron-helper/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "face-recognition": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/face-recognition",
+      "sourceRoot": "apps/face-recognition/src",
+      "prefix": "face-recognition",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/face-recognition",
+            "index": "apps/face-recognition/src/index.html",
+            "main": "apps/face-recognition/src/main.ts",
+            "polyfills": "apps/face-recognition/src/polyfills.ts",
+            "tsConfig": "apps/face-recognition/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/face-recognition/src/favicon.ico",
+              "apps/face-recognition/src/assets",
+              "apps/face-recognition/src/manifest.webmanifest"
+            ],
+            "styles": ["apps/face-recognition/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/face-recognition/src/environments/environment.ts",
+                  "with": "apps/face-recognition/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/face-recognition/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "face-recognition:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "face-recognition:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "face-recognition:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/face-recognition/tsconfig.app.json",
+              "apps/face-recognition/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/face-recognition/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/face-recognition/jest.config.js",
+            "tsConfig": "apps/face-recognition/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/face-recognition/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "face-recognition-e2e": {
+      "root": "apps/face-recognition-e2e",
+      "sourceRoot": "apps/face-recognition-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/face-recognition-e2e/cypress.json",
+            "tsConfig": "apps/face-recognition-e2e/tsconfig.e2e.json",
+            "devServerTarget": "face-recognition:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "face-recognition:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/face-recognition-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/face-recognition-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "face-recognition-admin"
+}

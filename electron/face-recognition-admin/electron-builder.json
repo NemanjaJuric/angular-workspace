@@ -1,0 +1,22 @@
+{
+  "productName": "face-recognition-admin",
+  "directories": {
+    "output": "release/face-recognition-admin"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts"
+  ],
+  "win": {
+    "icon": "../../dist/apps/face-recongition-admin/assets/icons",
+    "target": ["portable"]
+  },
+  "mac": {
+    "icon": "../../dist/apps/face-recongition-admin/assets/icons",
+    "target": ["dmg"]
+  },
+  "linux": {
+    "icon": "../../dist/apps/face-recongition-admin/assets/icons",
+    "target": ["AppImage"]
+  }
+}

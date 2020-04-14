@@ -1,0 +1,22 @@
+{
+  "productName": "face-recognition",
+  "directories": {
+    "output": "release/face-recognition"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts"
+  ],
+  "win": {
+    "icon": "../../dist/apps/face-recongition/assets/icons",
+    "target": ["portable"]
+  },
+  "mac": {
+    "icon": "../../dist/apps/face-recongition/assets/icons",
+    "target": ["dmg"]
+  },
+  "linux": {
+    "icon": "../../dist/apps/face-recongition/assets/icons",
+    "target": ["AppImage"]
+  }
+}

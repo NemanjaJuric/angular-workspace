@@ -1,0 +1,33 @@
+version: '3.5'
+
+services:
+  fr-app:
+    container_name: fr-app
+    build:
+      context: ./apps/face-recognition
+      dockerfile: dockerfile
+    restart: always
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    environment:
+      - PORT_APP
+      - API_PATH_APP
+      - WS_PATH_APP
+    ports:
+      - '${PORT_APP}:80'
+  fr-app-admin:
+    container_name: fr-app-admin
+    build:
+      context: ./apps/face-recognition-admin
+      dockerfile: dockerfile
+    restart: always
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    environment:
+      - PORT_APP_ADMIN
+      - API_PATH_APP_ADMIN
+      - WS_PATH_APP_ADMIN
+    ports:
+      - '${PORT_APP_ADMIN}:80'
