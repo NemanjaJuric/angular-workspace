@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ElectronHelperModule } from 'electron-helper';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ElectronHelperModule } from '@face-recognition/electron-helper';
 
 @NgModule({
   declarations: [AppComponent],

@@ -21,8 +21,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "electron-helper": [
-        "libs/utils/electron-helper/src/index.ts"
+      "@face-recognition/electron-helper": [
+        "libs/electron-helper/src/index.ts"
+      ],
+      "@face-recognition/domain-models": [
+        "libs/domain-models/src/index.ts"
       ]
     }
   },

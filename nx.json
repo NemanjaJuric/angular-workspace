@@ -35,6 +35,9 @@
     "face-recognition-e2e": {
       "tags": [],
       "implicitDependencies": ["face-recognition"]
+    },
+    "core-domain-models": {
+      "tags": []
     }
   }
 }

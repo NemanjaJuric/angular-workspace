@@ -24,7 +24,8 @@
             "aot": true,
             "assets": [
               "apps/face-recognition-admin/src/favicon.ico",
-              "apps/face-recognition-admin/src/assets"
+              "apps/face-recognition-admin/src/assets",
+              "apps/face-recognition-admin/src/manifest.webmanifest"
             ],
             "styles": ["apps/face-recognition-admin/src/styles.scss"],
             "scripts": [],
@@ -305,6 +306,38 @@
             "tsConfig": ["apps/face-recognition-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/face-recognition-e2e/**"]
           }
+        }
+      }
+    },
+    "core-domain-models": {
+      "projectType": "library",
+      "root": "libs/core/domain-models",
+      "sourceRoot": "libs/core/domain-models/src",
+      "prefix": "face-recognition",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/domain-models/tsconfig.lib.json",
+              "libs/core/domain-models/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/core/domain-models/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/core/domain-models/jest.config.js",
+            "tsConfig": "libs/core/domain-models/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/core/domain-models/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }
